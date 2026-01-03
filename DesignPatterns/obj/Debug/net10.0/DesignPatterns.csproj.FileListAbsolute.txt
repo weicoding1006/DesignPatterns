@@ -1,0 +1,15 @@
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/bin/Debug/net10.0/DesignPatterns
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/bin/Debug/net10.0/DesignPatterns.deps.json
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/bin/Debug/net10.0/DesignPatterns.runtimeconfig.json
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/bin/Debug/net10.0/DesignPatterns.dll
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/bin/Debug/net10.0/DesignPatterns.pdb
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.GeneratedMSBuildEditorConfig.editorconfig
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.AssemblyInfoInputs.cache
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.AssemblyInfo.cs
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.csproj.CoreCompileInputs.cache
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.dll
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/refint/DesignPatterns.dll
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.pdb
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.genruntimeconfig.cache
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/ref/DesignPatterns.dll
+/Users/lijiawei/Desktop/設計模式/DesignPatterns/obj/Debug/net10.0/DesignPatterns.sourcelink.json
