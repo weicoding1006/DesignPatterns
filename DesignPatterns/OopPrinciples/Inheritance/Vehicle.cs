@@ -11,12 +11,12 @@ public class Vehicle
         Year = year;
     }
 
-    public void Start()
+    public virtual void Start()
     {
         Console.WriteLine($"{Brand} {Model} is starting.");
     }
 
-    public void Stop()
+    public virtual void Stop()
     {
         Console.WriteLine($"{Brand} {Model} is stopping.");
     }
