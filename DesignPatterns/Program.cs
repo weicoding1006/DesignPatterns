@@ -27,7 +27,16 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // Order order = new Order(new SmsSender());
 // order.PlaceOrder();
 
-CompositionCar compositionCar = new CompositionCar();
-compositionCar.StartCar();
+// CompositionCar compositionCar = new CompositionCar();
+// compositionCar.StartCar();
 
-Console.WriteLine("\n");
+// DiscountCalculator discountCalculator = new DiscountCalculator();
+// var value = discountCalculator.Calculate(new GoldDiscount(),100);
+// Console.WriteLine(value);
+
+
+OrderService orderService = new OrderService(new SqlOrderRepository());
+orderService.ProcessOrder("測試");
+
+OrderService orderService2 = new OrderService(new MongoDbOrderRepostitory());
+orderService2.ProcessOrder("123");

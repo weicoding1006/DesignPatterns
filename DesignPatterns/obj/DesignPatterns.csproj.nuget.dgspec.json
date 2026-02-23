@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\2309013\\Desktop\\設計模式\\DesignPatterns\\DesignPatterns.csproj": {}
+    "C:\\Users\\2309013\\Desktop\\設計模式\\designPatterns\\DesignPatterns.csproj": {}
   },
   "projects": {
-    "C:\\Users\\2309013\\Desktop\\設計模式\\DesignPatterns\\DesignPatterns.csproj": {
+    "C:\\Users\\2309013\\Desktop\\設計模式\\designPatterns\\DesignPatterns.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\2309013\\Desktop\\設計模式\\DesignPatterns\\DesignPatterns.csproj",
+        "projectUniqueName": "C:\\Users\\2309013\\Desktop\\設計模式\\designPatterns\\DesignPatterns.csproj",
         "projectName": "DesignPatterns",
-        "projectPath": "C:\\Users\\2309013\\Desktop\\設計模式\\DesignPatterns\\DesignPatterns.csproj",
+        "projectPath": "C:\\Users\\2309013\\Desktop\\設計模式\\designPatterns\\DesignPatterns.csproj",
         "packagesPath": "C:\\Users\\2309013\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\2309013\\Desktop\\設計模式\\DesignPatterns\\obj\\",
+        "outputPath": "C:\\Users\\2309013\\Desktop\\設計模式\\designPatterns\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
