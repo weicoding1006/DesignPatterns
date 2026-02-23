@@ -29,3 +29,5 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 
 CompositionCar compositionCar = new CompositionCar();
 compositionCar.StartCar();
+
+Console.WriteLine("\n");
