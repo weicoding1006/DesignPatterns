@@ -35,8 +35,20 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // Console.WriteLine(value);
 
 
-OrderService orderService = new OrderService(new SqlOrderRepository());
-orderService.ProcessOrder("測試");
+// OrderService orderService = new OrderService(new SqlOrderRepository());
+// orderService.ProcessOrder("測試");
 
-OrderService orderService2 = new OrderService(new MongoDbOrderRepostitory());
-orderService2.ProcessOrder("123");
+// OrderService orderService2 = new OrderService(new MongoDbOrderRepostitory());
+// orderService2.ProcessOrder("123");
+
+Document doc = new Document(new DraftState());
+
+doc.RequestPublish();
+Console.WriteLine("------");
+
+doc.RequestReview();
+doc.RequestPublish();
+
+Console.WriteLine("------");
+
+doc.RequestReview();
