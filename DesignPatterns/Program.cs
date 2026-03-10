@@ -41,14 +41,23 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // OrderService orderService2 = new OrderService(new MongoDbOrderRepostitory());
 // orderService2.ProcessOrder("123");
 
-Document doc = new Document(new DraftState());
+// Document doc = new Document(new DraftState());
 
-doc.RequestPublish();
-Console.WriteLine("------");
+// doc.RequestPublish();
+// Console.WriteLine("------");
 
-doc.RequestReview();
-doc.RequestPublish();
+// doc.RequestReview();
+// doc.RequestPublish();
 
-Console.WriteLine("------");
+// Console.WriteLine("------");
 
-doc.RequestReview();
+// doc.RequestReview();
+
+
+decimal orderAmount = 1000m;
+IPaymentStrategy creditStrategy = new CreditCardStrategy();
+CheckoutContext checkout = new CheckoutContext(creditStrategy);
+checkout.ProcessCheckout(orderAmount);
+
+checkout.SetPaymentStrategy(new LinePayStrategy());
+checkout.ProcessCheckout(orderAmount);
