@@ -54,10 +54,23 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // doc.RequestReview();
 
 
-decimal orderAmount = 1000m;
-IPaymentStrategy creditStrategy = new CreditCardStrategy();
-CheckoutContext checkout = new CheckoutContext(creditStrategy);
-checkout.ProcessCheckout(orderAmount);
+// decimal orderAmount = 1000m;
+// IPaymentStrategy creditStrategy = new CreditCardStrategy();
+// CheckoutContext checkout = new CheckoutContext(creditStrategy);
+// checkout.ProcessCheckout(orderAmount);
 
-checkout.SetPaymentStrategy(new LinePayStrategy());
-checkout.ProcessCheckout(orderAmount);
+// checkout.SetPaymentStrategy(new LinePayStrategy());
+// checkout.ProcessCheckout(orderAmount);
+
+Library library = new Library();
+library.AddBook(new Book("設計模式"));
+library.AddBook(new Book("C# 深入淺出"));
+
+ITerator<Book> iterator = library.CreateIterator();
+Console.WriteLine("開始走訪圖書館裡的書");
+
+while(iterator.HasNext())
+{
+    Book currentBook = iterator.Next();
+    Console.WriteLine($"{currentBook.Title}");
+}
