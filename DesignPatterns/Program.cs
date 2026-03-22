@@ -62,15 +62,34 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // checkout.SetPaymentStrategy(new LinePayStrategy());
 // checkout.ProcessCheckout(orderAmount);
 
-Library library = new Library();
-library.AddBook(new Book("設計模式"));
-library.AddBook(new Book("C# 深入淺出"));
+// Library library = new Library();
+// library.AddBook(new Book("設計模式"));
+// library.AddBook(new Book("C# 深入淺出"));
 
-ITerator<Book> iterator = library.CreateIterator();
-Console.WriteLine("開始走訪圖書館裡的書");
+// ITerator<Book> iterator = library.CreateIterator();
+// Console.WriteLine("開始走訪圖書館裡的書");
 
-while(iterator.HasNext())
-{
-    Book currentBook = iterator.Next();
-    Console.WriteLine($"{currentBook.Title}");
-}
+// while(iterator.HasNext())
+// {
+//     Book currentBook = iterator.Next();
+//     Console.WriteLine($"{currentBook.Title}");
+// }
+
+Light livingRoomLight = new Light();
+ICommand lightOn = new LightOnCommand(livingRoomLight);
+ICommand lightOff = new LightOffCommand(livingRoomLight);
+
+RemoteControl remote = new RemoteControl();
+Console.WriteLine("--開啟電燈");
+remote.SetCommand(lightOn);
+remote.PressButton();
+
+Console.WriteLine("--關閉電燈--");
+remote.SetCommand(lightOff);
+remote.PressButton();
+
+Console.WriteLine("--復原剛才動作--");
+remote.PressUndoButton();
+remote.PressUndoButton();
+remote.PressUndoButton();
+remote.PressUndoButton();
