@@ -75,21 +75,27 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 //     Console.WriteLine($"{currentBook.Title}");
 // }
 
-Light livingRoomLight = new Light();
-ICommand lightOn = new LightOnCommand(livingRoomLight);
-ICommand lightOff = new LightOffCommand(livingRoomLight);
+// Light livingRoomLight = new Light();
+// ICommand lightOn = new LightOnCommand(livingRoomLight);
+// ICommand lightOff = new LightOffCommand(livingRoomLight);
 
-RemoteControl remote = new RemoteControl();
-Console.WriteLine("--開啟電燈");
-remote.SetCommand(lightOn);
-remote.PressButton();
+// RemoteControl remote = new RemoteControl();
+// Console.WriteLine("--開啟電燈");
+// remote.SetCommand(lightOn);
+// remote.PressButton();
 
-Console.WriteLine("--關閉電燈--");
-remote.SetCommand(lightOff);
-remote.PressButton();
+// Console.WriteLine("--關閉電燈--");
+// remote.SetCommand(lightOff);
+// remote.PressButton();
 
-Console.WriteLine("--復原剛才動作--");
-remote.PressUndoButton();
-remote.PressUndoButton();
-remote.PressUndoButton();
-remote.PressUndoButton();
+// Console.WriteLine("--復原剛才動作--");
+// remote.PressUndoButton();
+// remote.PressUndoButton();
+// remote.PressUndoButton();
+// remote.PressUndoButton();
+
+Beverage coffee = new Coffee();
+coffee.PrepareRecipe();
+
+Beverage tea = new Tea();
+tea.PrepareRecipe();
