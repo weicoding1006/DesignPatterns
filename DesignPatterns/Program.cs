@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using DesignPatterns.OopPrinciples.Encapsulation;
 
 // BankAccount bankAccount = new(100);
@@ -101,14 +101,29 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // tea.PrepareRecipe();
 
 
-var channel = new YouTubeChannel();
-var sub1 = new Subscriber("Jeff");
-var sub2 = new Subscriber("Hani");
+// var channel = new YouTubeChannel();
+// var sub1 = new Subscriber("Jeff");
+// var sub2 = new Subscriber("Hani");
 
-channel.Attach(sub1);
-channel.Attach(sub2);
+// channel.Attach(sub1);
+// channel.Attach(sub2);
 
-channel.UploadVideo("C#教學");
+// channel.UploadVideo("C#教學");
 
-channel.Detach(sub1);
-channel.UploadVideo("工程師必看");
+// channel.Detach(sub1);
+// channel.UploadVideo("工程師必看");
+
+
+// var charRoom = new ChatRoom();
+// var alice = new MediatorUser("Alice");
+// var bob = new MediatorUser("Bob");
+// var jeff = new MediatorUser("Jeff");
+
+// charRoom.RegisterUser(alice);
+// charRoom.RegisterUser(bob);
+// charRoom.RegisterUser(jeff);
+
+// alice.Send("哈囉大家好");
+// jeff.Send("嗨 Alice");
+// jeff.SendPrivate("測試","Alice");
+
