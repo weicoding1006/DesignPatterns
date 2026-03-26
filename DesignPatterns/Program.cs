@@ -94,8 +94,21 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // remote.PressUndoButton();
 // remote.PressUndoButton();
 
-Beverage coffee = new Coffee();
-coffee.PrepareRecipe();
+// Beverage coffee = new Coffee();
+// coffee.PrepareRecipe();
 
-Beverage tea = new Tea();
-tea.PrepareRecipe();
+// Beverage tea = new Tea();
+// tea.PrepareRecipe();
+
+
+var channel = new YouTubeChannel();
+var sub1 = new Subscriber("Jeff");
+var sub2 = new Subscriber("Hani");
+
+channel.Attach(sub1);
+channel.Attach(sub2);
+
+channel.UploadVideo("C#教學");
+
+channel.Detach(sub1);
+channel.UploadVideo("工程師必看");
