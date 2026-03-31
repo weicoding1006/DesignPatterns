@@ -1,4 +1,5 @@
 using System.Numerics;
+using DesignPatterns.Behavioral.Chain_of_Responsibility;
 using DesignPatterns.OopPrinciples.Encapsulation;
 
 // BankAccount bankAccount = new(100);
@@ -127,3 +128,16 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // jeff.Send("嗨 Alice");
 // jeff.SendPrivate("測試","Alice");
 
+// 1. 建立各個節點
+Approver manager = new Manager();
+Approver director = new Director();
+Approver ceo = new CEO();
+// 2. 組裝責任鏈：Manager -> Director -> CEO
+manager.SetNext(director).SetNext(ceo);
+// 3. 發送請求 (用戶端只需要接觸責任鏈的「起點」)
+Console.WriteLine("--- 申請 500 元 ---");
+manager.ProcessRequest(500);
+Console.WriteLine("\n--- 申請 35,000 元 ---");
+manager.ProcessRequest(35000);
+Console.WriteLine("\n--- 申請 1,000,000 元 ---");
+manager.ProcessRequest(1000000);
