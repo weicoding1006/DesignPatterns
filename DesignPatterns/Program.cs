@@ -1,5 +1,6 @@
 using System.Numerics;
 using DesignPatterns.Behavioral.Chain_of_Responsibility;
+using DesignPatterns.Behavioral.Visitor;
 using DesignPatterns.OopPrinciples.Encapsulation;
 
 // BankAccount bankAccount = new(100);
@@ -129,15 +130,36 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // jeff.SendPrivate("測試","Alice");
 
 // 1. 建立各個節點
-Approver manager = new Manager();
-Approver director = new Director();
-Approver ceo = new CEO();
+// Approver manager = new Manager();
+// Approver director = new Director();
+// Approver ceo = new CEO();
 // 2. 組裝責任鏈：Manager -> Director -> CEO
-manager.SetNext(director).SetNext(ceo);
+// manager.SetNext(director).SetNext(ceo);
 // 3. 發送請求 (用戶端只需要接觸責任鏈的「起點」)
-Console.WriteLine("--- 申請 500 元 ---");
-manager.ProcessRequest(500);
-Console.WriteLine("\n--- 申請 35,000 元 ---");
-manager.ProcessRequest(35000);
-Console.WriteLine("\n--- 申請 1,000,000 元 ---");
-manager.ProcessRequest(1000000);
+// Console.WriteLine("--- 申請 500 元 ---");
+// manager.ProcessRequest(500);
+// Console.WriteLine("\n--- 申請 35,000 元 ---");
+// manager.ProcessRequest(35000);
+// Console.WriteLine("\n--- 申請 1,000,000 元 ---");
+// manager.ProcessRequest(1000000);
+
+List<IEmployee> employees = new List<IEmployee>
+{
+    new Engineer("Alice",60000,10000),
+    new Engineer("Bob",50000,8000),
+    new DesignPatterns.Behavioral.Visitor.Manager("Hani",100000,3),
+};
+
+IVisitor bonusVistor = new BonusVisitor();
+IVisitor vacationVisitor = new VacationVisitor();
+Console.WriteLine("--年終獎金--");
+foreach(var employee in employees)
+{
+    employee.Accept(bonusVistor);
+}
+
+Console.WriteLine("\n--- 計算特休天數 ---");
+foreach(var employee in employees)
+{
+    employee.Accept(vacationVisitor);
+}
