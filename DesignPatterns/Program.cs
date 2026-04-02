@@ -1,5 +1,6 @@
 using System.Numerics;
 using DesignPatterns.Behavioral.Chain_of_Responsibility;
+using DesignPatterns.Behavioral.Interpreter;
 using DesignPatterns.Behavioral.Visitor;
 using DesignPatterns.OopPrinciples.Encapsulation;
 
@@ -143,23 +144,36 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 // Console.WriteLine("\n--- 申請 1,000,000 元 ---");
 // manager.ProcessRequest(1000000);
 
-List<IEmployee> employees = new List<IEmployee>
-{
-    new Engineer("Alice",60000,10000),
-    new Engineer("Bob",50000,8000),
-    new DesignPatterns.Behavioral.Visitor.Manager("Hani",100000,3),
-};
+// List<IEmployee> employees = new List<IEmployee>
+// {
+//     new Engineer("Alice",60000,10000),
+//     new Engineer("Bob",50000,8000),
+//     new DesignPatterns.Behavioral.Visitor.Manager("Hani",100000,3),
+// };
 
-IVisitor bonusVistor = new BonusVisitor();
-IVisitor vacationVisitor = new VacationVisitor();
-Console.WriteLine("--年終獎金--");
-foreach(var employee in employees)
-{
-    employee.Accept(bonusVistor);
-}
+// IVisitor bonusVistor = new BonusVisitor();
+// IVisitor vacationVisitor = new VacationVisitor();
+// Console.WriteLine("--年終獎金--");
+// foreach(var employee in employees)
+// {
+//     employee.Accept(bonusVistor);
+// }
 
-Console.WriteLine("\n--- 計算特休天數 ---");
-foreach(var employee in employees)
-{
-    employee.Accept(vacationVisitor);
-}
+// Console.WriteLine("\n--- 計算特休天數 ---");
+// foreach(var employee in employees)
+// {
+//     employee.Accept(vacationVisitor);
+// }
+
+Context context = new Context();
+context.Assign("a",10);
+context.Assign("b",5);
+context.Assign("c",2);
+
+IExpression a = new VariableExpression("a");
+IExpression b = new VariableExpression("b");
+IExpression c = new VariableExpression("c");
+
+IExpression expression = new SubtractExpression(new AddExpression(a,b),c);
+int result = expression.Interpret(context);
+Console.WriteLine($"Result of a + b - c  : {result}"); 
