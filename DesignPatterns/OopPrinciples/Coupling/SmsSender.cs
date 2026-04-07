@@ -1,7 +1,10 @@
-public class SmsSender : INotificationService
+namespace DesignPatterns.OopPrinciples
 {
-    public void SendNotification(string message)
+    public class SmsSender : INotificationService
     {
-        Console.WriteLine("SMS送出" + message);
+        public void SendNotification(string message)
+        {
+            Console.WriteLine("SMS送出" + message);
+        }
     }
 }

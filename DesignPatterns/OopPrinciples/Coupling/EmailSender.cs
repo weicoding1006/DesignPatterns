@@ -1,9 +1,11 @@
 
-
-public class EmailSender : INotificationService
+namespace DesignPatterns.OopPrinciples
 {
-    public void SendNotification(string message)
+    public class EmailSender : INotificationService
     {
-        Console.WriteLine("寄送信件" + message);
+        public void SendNotification(string message)
+        {
+            Console.WriteLine("寄送信件" + message);
+        }
     }
 }
