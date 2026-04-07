@@ -2,7 +2,9 @@ using System.Numerics;
 using DesignPatterns.Behavioral.Chain_of_Responsibility;
 using DesignPatterns.Behavioral.Interpreter;
 using DesignPatterns.Behavioral.Visitor;
+using DesignPatterns.DesignPatternsCourse.Structural.Adapter;
 using DesignPatterns.OopPrinciples.Encapsulation;
+using DesignPatterns.Structural.Composite;
 
 // BankAccount bankAccount = new(100);
 
@@ -165,15 +167,43 @@ using DesignPatterns.OopPrinciples.Encapsulation;
 //     employee.Accept(vacationVisitor);
 // }
 
-Context context = new Context();
-context.Assign("a",10);
-context.Assign("b",5);
-context.Assign("c",2);
+// Context context = new Context();
+// context.Assign("a",10);
+// context.Assign("b",5);
+// context.Assign("c",2);
 
-IExpression a = new VariableExpression("a");
-IExpression b = new VariableExpression("b");
-IExpression c = new VariableExpression("c");
+// IExpression a = new VariableExpression("a");
+// IExpression b = new VariableExpression("b");
+// IExpression c = new VariableExpression("c");
 
-IExpression expression = new SubtractExpression(new AddExpression(a,b),c);
-int result = expression.Interpret(context);
-Console.WriteLine($"Result of a + b - c  : {result}"); 
+// IExpression expression = new SubtractExpression(new AddExpression(a,b),c);
+// int result = expression.Interpret(context);
+// Console.WriteLine($"Result of a + b - c  : {result}"); 
+
+// DirectoryComposite rootDir = new DirectoryComposite("Root");
+// FileLeaf file1 = new FileLeaf("config.xml");
+// FileLeaf file2 = new FileLeaf("readme.txt");
+
+// DirectoryComposite subDir = new DirectoryComposite("Images");
+// FileLeaf img1 = new FileLeaf("logo.png");
+// FileLeaf img2 = new FileLeaf("bg.jpg");
+// subDir.Add(img1);
+// subDir.Add(img2);
+
+// rootDir.Add(file1);
+// rootDir.Add(file2);
+// rootDir.Add(subDir);
+
+// rootDir.Display(1);
+
+// 1. 建立一個舊有系統 (Adaptee) 的實例
+LegacyXmlDataReader legacySystem = new LegacyXmlDataReader();
+
+// 2. 舊系統因為只能吐出 XML，正常無法直接接到新系統上
+// 建立一個適配器 (Adapter)，並將舊系統當作參數傳入進行封裝
+IJsonDataProvider adapter = new XmlToJsonAdapter(legacySystem);
+
+// 3. 客戶端 (Client) 只需認識 Target 介面 (IJsonDataProvider) 並調用方法
+string resultJson = adapter.GetJsonData();
+
+Console.WriteLine($"\n[Client] 成功取得最終資料:\n{resultJson}");
