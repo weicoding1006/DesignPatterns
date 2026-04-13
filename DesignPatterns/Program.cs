@@ -1,5 +1,7 @@
 using DesignPatterns.DesignPatternsCourse.Structural.Bridge;
 using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
+using DesignPatterns.Structural.Decorator;
+using DesignPatterns.Structural.Facade;
 
 // Console.WriteLine("=== Bridge Pattern ===");
 
@@ -15,40 +17,66 @@ using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
 // normalEmailMessage.Send();
 // urgentSmsMessage.Send();
 
-IDocument docForEmployee = new DocumentProxy("Employee");
-docForEmployee.Read();
-docForEmployee.Write("亂改");
+// IDocument docForEmployee = new DocumentProxy("Employee");
+// docForEmployee.Read();
+// docForEmployee.Write("亂改");
 
-IDocument docForManger = new DocumentProxy("Manager");
-docForManger.Read();
-docForManger.Write("更新財報為Q4數據");
-docForManger.Read();
+// IDocument docForManger = new DocumentProxy("Manager");
+// docForManger.Read();
+// docForManger.Write("更新財報為Q4數據");
+// docForManger.Read();
 
 // === Flyweight 享元模式 ===
-Console.WriteLine("\n=== Flyweight 享元模式 ===");
+// Console.WriteLine("\n=== Flyweight 享元模式 ===");
 
-var forest = new Forest();
+// var forest = new Forest();
 
-string[] names    = { "橡樹", "松樹", "楓樹" };
-string[] colors   = { "深綠", "翠綠", "橘紅" };
-string[] textures = { "粗糙", "細緻", "光滑" };
+// string[] names    = { "橡樹", "松樹", "楓樹" };
+// string[] colors   = { "深綠", "翠綠", "橘紅" };
+// string[] textures = { "粗糙", "細緻", "光滑" };
 
-var rng = new Random(42);
-for (int i = 0; i < 12; i++)
-{
-    int idx = rng.Next(3);
-    forest.PlantTree(
-        x: rng.Next(100),
-        y: rng.Next(100),
-        name: names[idx],
-        color: colors[idx],
-        texture: textures[idx]
-    );
-}
+// var rng = new Random(42);
+// for (int i = 0; i < 12; i++)
+// {
+//     int idx = rng.Next(3);
+//     forest.PlantTree(
+//         x: rng.Next(100),
+//         y: rng.Next(100),
+//         name: names[idx],
+//         color: colors[idx],
+//         texture: textures[idx]
+//     );
+// }
 
-Console.WriteLine("\n--- 繪製森林 ---");
-forest.Draw();
+// Console.WriteLine("\n--- 繪製森林 ---");
+// forest.Draw();
 
-Console.WriteLine($"\n種植了 {forest.TreeCount} 棵樹");
-Console.WriteLine($"享元工廠共享物件數量：{TreeFactory.GetCacheSize()} 種 TreeType");
-Console.WriteLine($"省記憶體原理：{forest.TreeCount} 棵樹只用了 {TreeFactory.GetCacheSize()} 個 TreeType 物件！");
+// Console.WriteLine($"\n種植了 {forest.TreeCount} 棵樹");
+// Console.WriteLine($"享元工廠共享物件數量：{TreeFactory.GetCacheSize()} 種 TreeType");
+// Console.WriteLine($"省記憶體原理：{forest.TreeCount} 棵樹只用了 {TreeFactory.GetCacheSize()} 個 TreeType 物件！");
+
+// === Facade 模式（外觀模式 / 門面模式 ===
+// var projector = new Projector();
+// var sound = new SoundSystem();
+// var lights = new Lights();
+
+// var homeTheaterFacade = new HomeTheaterFacade(projector,sound,lights);
+// homeTheaterFacade.WatchMovie();
+// homeTheaterFacade.EndMovie();
+
+
+
+// Decorator 模式（裝飾者模式)
+// 1. 點一杯基本紅茶
+IBeverage myDrink = new BlackTea();
+Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+//2. 加牛奶
+myDrink = new Milk(myDrink);
+Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+//3. 再加珍珠
+myDrink = new Boba(myDrink);
+Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+
+// 4. 瘋狂客製化：雙份珍珠綠茶
+IBeverage crazyDrink = new Boba(new Boba(new GreenTea()));
+Console.WriteLine($"{crazyDrink.GetDescription()} = ${crazyDrink.GetCost()}");
