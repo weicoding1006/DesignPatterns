@@ -1,3 +1,6 @@
+using DesignPatterns.DesignPatternsCourse.Creational;
+using DesignPatterns.DesignPatternsCourse.Creational.Singleton;
+using DesignPatterns.DesignPatternsCourse.Creational.FactoryMethod;
 using DesignPatterns.DesignPatternsCourse.Structural.Bridge;
 using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
 using DesignPatterns.Structural.Decorator;
@@ -68,15 +71,47 @@ using DesignPatterns.Structural.Facade;
 
 // Decorator 模式（裝飾者模式)
 // 1. 點一杯基本紅茶
-IBeverage myDrink = new BlackTea();
-Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+// IBeverage myDrink = new BlackTea();
+// Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
 //2. 加牛奶
-myDrink = new Milk(myDrink);
-Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+// myDrink = new Milk(myDrink);
+// Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
 //3. 再加珍珠
-myDrink = new Boba(myDrink);
-Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
+// myDrink = new Boba(myDrink);
+// Console.WriteLine($"{myDrink.GetDescription()} = ${myDrink.GetCost()}");
 
 // 4. 瘋狂客製化：雙份珍珠綠茶
-IBeverage crazyDrink = new Boba(new Boba(new GreenTea()));
-Console.WriteLine($"{crazyDrink.GetDescription()} = ${crazyDrink.GetCost()}");
+// IBeverage crazyDrink = new Boba(new Boba(new GreenTea()));
+// Console.WriteLine($"{crazyDrink.GetDescription()} = ${crazyDrink.GetCost()}");
+
+// // Singleton
+// var config1 = AppConfig.Instance;
+// var config2 = AppConfig.Instance;
+// Console.WriteLine($"App : {config1.ApplicationName}");
+// Console.WriteLine($"Version: {config1.Version}");
+// config1.UpdateVersion("1.1.0");
+// Console.WriteLine($"App : {config2.ApplicationName}");
+// Console.WriteLine($"Version: {config2.Version}");
+
+// === Factory Method 工廠方法模式 ===
+Console.WriteLine("=== Factory Method Pattern ===");
+
+// 情境 1：目前只有陸路物流，呼叫方只知道 LogisticsCreator，不在乎底層是卡車還是輪船
+LogisticsCreator logistics = new RoadLogistics();
+logistics.PlanDelivery("電腦零件 x 100箱");
+
+// 情境 2：業務擴展到海外，切換為海路物流，呼叫方的程式碼完全不用改動
+logistics = new SeaLogistics();
+logistics.PlanDelivery("重型機械 x 5台");
+
+/*
+預期輸出:
+=== Factory Method Pattern ===
+--- 開始規劃配送 ---
+[卡車🚛] 透過公路運送：電腦零件 x 100箱
+--- 配送完成 ---
+
+--- 開始規劃配送 ---
+[輪船🚢] 透過海路運送：重型機械 x 5台
+--- 配送完成 ---
+*/
