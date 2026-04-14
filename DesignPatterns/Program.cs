@@ -1,6 +1,11 @@
 using DesignPatterns.DesignPatternsCourse.Creational;
 using DesignPatterns.DesignPatternsCourse.Creational.Singleton;
 using DesignPatterns.DesignPatternsCourse.Creational.FactoryMethod;
+using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory;
+using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Abstracts;
+using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Windows;
+using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Mac;
+using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Linux;
 using DesignPatterns.DesignPatternsCourse.Structural.Bridge;
 using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
 using DesignPatterns.Structural.Decorator;
@@ -93,25 +98,34 @@ using DesignPatterns.Structural.Facade;
 // Console.WriteLine($"App : {config2.ApplicationName}");
 // Console.WriteLine($"Version: {config2.Version}");
 
-// === Factory Method 工廠方法模式 ===
-Console.WriteLine("=== Factory Method Pattern ===");
+// // === Factory Method 工廠方法模式 ===
+// LogisticsCreator logistics = new RoadLogistics();
+// logistics.PlanDelivery("電腦零件 x 100箱");
+// logistics = new SeaLogistics();
+// logistics.PlanDelivery("重型機械 x 5台");
 
-// 情境 1：目前只有陸路物流，呼叫方只知道 LogisticsCreator，不在乎底層是卡車還是輪船
-LogisticsCreator logistics = new RoadLogistics();
-logistics.PlanDelivery("電腦零件 x 100箱");
+// === Abstract Factory 抽象工廠模式 ===
+Console.WriteLine("=== Abstract Factory Pattern ===");
 
-// 情境 2：業務擴展到海外，切換為海路物流，呼叫方的程式碼完全不用改動
-logistics = new SeaLogistics();
-logistics.PlanDelivery("重型機械 x 5台");
+// 情境 1：偵測到目前執行環境為 Windows，注入 Windows 工廠
+// UIApplication 只依賴 IUIFactory，完全不感知是 Windows 還是 Mac
+Console.WriteLine("\n[ 平台：Windows ]");
+IUIFactory factory = new WindowsUIFactory();
+var app = new UIApplication(factory);
+app.RenderUI();
+app.SimulateInteraction();
 
-/*
-預期輸出:
-=== Factory Method Pattern ===
---- 開始規劃配送 ---
-[卡車🚛] 透過公路運送：電腦零件 x 100箱
---- 配送完成 ---
+// 情境 2：切換到 Mac 環境，只要換掉工廠，UI 風格自動一致
+// UIApplication 的程式碼一行都不需要改！
+Console.WriteLine("\n[ 平台：Mac ]");
+factory = new MacUIFactory();
+app = new UIApplication(factory);
+app.RenderUI();
+app.SimulateInteraction();
 
---- 開始規劃配送 ---
-[輪船🚢] 透過海路運送：重型機械 x 5台
---- 配送完成 ---
-*/
+// 情境 3：擴充 Linux 環境，同樣不需更改 Client 程式碼
+Console.WriteLine("\n[ 平台：Linux ]");
+factory = new LinuxUIFactory();
+app = new UIApplication(factory);
+app.RenderUI();
+app.SimulateInteraction();
