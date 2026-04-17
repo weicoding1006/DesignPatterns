@@ -11,6 +11,7 @@ using DesignPatterns.DesignPatternsCourse.Structural.Bridge;
 using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
 using DesignPatterns.Structural.Decorator;
 using DesignPatterns.Structural.Facade;
+using DesignPatternsCourse.Creational.Prototype;
 
 // Console.WriteLine("=== Bridge Pattern ===");
 
@@ -132,32 +133,90 @@ using DesignPatterns.Structural.Facade;
 // app.SimulateInteraction();
 
 // === Builder 建造者模式 ===
-Console.WriteLine("=== Builder Pattern ===");
+// Console.WriteLine("=== Builder Pattern ===");
 
 // ─── 用法 1：透過 Director 控制建造流程（GoF 完整形式）───
-Console.WriteLine("\n[ 用法 1：透過 Director 控制建造流程 ]");
+// Console.WriteLine("\n[ 用法 1：透過 Director 控制建造流程 ]");
 
 // 情境 A：辦公文書機報價單
-Console.WriteLine("\n--- 辦公文書機報價單 ---");
-IComputerBuilder officeBuilder = new OfficeComputerBuilder();
-var director = new QuoteDirector(officeBuilder);
-ComputerQuote officePC = director.BuildOfficePC();
-officePC.Show("辦公文書機");
+// Console.WriteLine("\n--- 辦公文書機報價單 ---");
+// IComputerBuilder officeBuilder = new OfficeComputerBuilder();
+// var director = new QuoteDirector(officeBuilder);
+// ComputerQuote officePC = director.BuildOfficePC();
+// officePC.Show("辦公文書機");
 
 // 情境 B：切換為電競旗艦機（只換 Builder，Director 程式碼不動）
-Console.WriteLine("\n--- 電競旗艦機報價單 ---");
-IComputerBuilder gamingBuilder = new GamingComputerBuilder();
-director.SetBuilder(gamingBuilder);
-ComputerQuote gamingPC = director.BuildGamingPC();
-gamingPC.Show("電競旗艦機");
+// Console.WriteLine("\n--- 電競旗艦機報價單 ---");
+// IComputerBuilder gamingBuilder = new GamingComputerBuilder();
+// director.SetBuilder(gamingBuilder);
+// ComputerQuote gamingPC = director.BuildGamingPC();
+// gamingPC.Show("電競旗艦機");
 
 // ─── 用法 2：Fluent Builder，不使用 Director，呼叫方自行串聯步驟 ───
-Console.WriteLine("\n[ 用法 2：Fluent Builder — 自訂規格，不依賴 Director ]");
-var customPC = new GamingComputerBuilder()
-    .SetCPU("AMD Ryzen 9 7950X")
-    .SetGPU("AMD Radeon RX 7900 XTX")
-    .SetRAM("128GB DDR5")
-    .SetStorage("4TB PCIe Gen5 NVMe SSD")
-    .SetPSU("1200W 80+ Titanium")
-    .GetResult();
-customPC.Show("自訂旗艦機");
+// Console.WriteLine("\n[ 用法 2：Fluent Builder — 自訂規格，不依賴 Director ]");
+// var customPC = new GamingComputerBuilder()
+//     .SetCPU("AMD Ryzen 9 7950X")
+//     .SetGPU("AMD Radeon RX 7900 XTX")
+//     .SetRAM("128GB DDR5")
+//     .SetStorage("4TB PCIe Gen5 NVMe SSD")
+//     .SetPSU("1200W 80+ Titanium")
+//     .GetResult();
+// customPC.Show("自訂旗艦機");
+
+
+Console.WriteLine("=== Prototype Pattern ===");
+
+// ── 步驟 1：建立原型登錄表，並登錄各種原型 ──
+Console.WriteLine("\n[ 步驟 1：初始化 MonsterRegistry，登錄三種怪物原型 ]");
+var registry = new MonsterRegistry();
+registry.Register("goblin",   new Goblin());
+registry.Register("skeleton", new SkeletonWarrior());
+registry.Register("dragon",   new Dragon());
+
+// ── 步驟 2：Spawn 哥布林（展示淺拷貝 vs 深拷貝的安全性）──
+Console.WriteLine("\n[ 步驟 2：Spawn 多隻哥布林並設定不同等級 ]");
+var goblinLv1  = (Goblin)registry.Spawn("goblin");
+goblinLv1.SetLevel(1);
+
+var goblinLv5  = (Goblin)registry.Spawn("goblin");
+goblinLv5.SetLevel(5);
+goblinLv5.Drops.Add("菁英勳章");   // ← 只修改 clone，不影響原型
+
+var goblinLv10 = (Goblin)registry.Spawn("goblin");
+goblinLv10.SetLevel(10);
+goblinLv10.Drops.Add("哥布林頭盔");
+
+goblinLv1.Show();
+goblinLv5.Show();
+goblinLv10.Show();
+
+// ── 步驟 3：Spawn 骷髏士兵（含巢狀物件 LootTable）──
+Console.WriteLine("\n[ 步驟 3：Spawn 骷髏士兵（巢狀物件深拷貝） ]");
+var skeleton1 = (SkeletonWarrior)registry.Spawn("skeleton");
+skeleton1.SetLevel(5);
+
+var skeleton2 = (SkeletonWarrior)registry.Spawn("skeleton");
+skeleton2.SetLevel(12);    // 升級成骷髏騎士，會自動加上 "古代劍" 掉落
+
+skeleton1.Show();
+skeleton2.Show();
+
+// ── 步驟 4：Spawn 龍（BOSS）──
+Console.WriteLine("\n[ 步驟 4：Spawn 龍（高等級解鎖技能） ]");
+var dragonLv20 = (Dragon)registry.Spawn("dragon");
+dragonLv20.SetLevel(20);
+
+var dragonLv55 = (Dragon)registry.Spawn("dragon");
+dragonLv55.SetLevel(55);   // 解鎖「龍息衝波」與「世界終焉」
+
+dragonLv20.Show();
+dragonLv55.Show();
+
+// ── 步驟 5：驗證深拷貝的獨立性 ──
+Console.WriteLine("\n[ 步驟 5：驗證深拷貝——修改 Clone 不影響原型 ]");
+var original = new Goblin();
+var clone    = (Goblin)original.Clone();
+clone.Drops.Add("測試道具");   // 只加到 clone 的 Drops
+
+Console.WriteLine($"  原型 Drops 數量 : {original.Drops.Count}  （應為 2，不受影響）");
+Console.WriteLine($"  Clone  Drops 數量 : {clone.Drops.Count}  （應為 3，獨立）");
