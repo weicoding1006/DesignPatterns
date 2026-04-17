@@ -6,6 +6,7 @@ using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Abstracts;
 using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Windows;
 using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Mac;
 using DesignPatterns.DesignPatternsCourse.Creational.AbstractFactory.Linux;
+using DesignPatterns.DesignPatternsCourse.Creational.Builder;
 using DesignPatterns.DesignPatternsCourse.Structural.Bridge;
 using DesignPatterns.DesignPatternsCourse.Structural.Flyweight;
 using DesignPatterns.Structural.Decorator;
@@ -105,27 +106,58 @@ using DesignPatterns.Structural.Facade;
 // logistics.PlanDelivery("重型機械 x 5台");
 
 // === Abstract Factory 抽象工廠模式 ===
-Console.WriteLine("=== Abstract Factory Pattern ===");
+// Console.WriteLine("=== Abstract Factory Pattern ===");
 
 // 情境 1：偵測到目前執行環境為 Windows，注入 Windows 工廠
 // UIApplication 只依賴 IUIFactory，完全不感知是 Windows 還是 Mac
-Console.WriteLine("\n[ 平台：Windows ]");
-IUIFactory factory = new WindowsUIFactory();
-var app = new UIApplication(factory);
-app.RenderUI();
-app.SimulateInteraction();
+// Console.WriteLine("\n[ 平台：Windows ]");
+// IUIFactory factory = new WindowsUIFactory();
+// var app = new UIApplication(factory);
+// app.RenderUI();
+// app.SimulateInteraction();
 
 // 情境 2：切換到 Mac 環境，只要換掉工廠，UI 風格自動一致
 // UIApplication 的程式碼一行都不需要改！
-Console.WriteLine("\n[ 平台：Mac ]");
-factory = new MacUIFactory();
-app = new UIApplication(factory);
-app.RenderUI();
-app.SimulateInteraction();
+// Console.WriteLine("\n[ 平台：Mac ]");
+// factory = new MacUIFactory();
+// app = new UIApplication(factory);
+// app.RenderUI();
+// app.SimulateInteraction();
 
 // 情境 3：擴充 Linux 環境，同樣不需更改 Client 程式碼
-Console.WriteLine("\n[ 平台：Linux ]");
-factory = new LinuxUIFactory();
-app = new UIApplication(factory);
-app.RenderUI();
-app.SimulateInteraction();
+// Console.WriteLine("\n[ 平台：Linux ]");
+// factory = new LinuxUIFactory();
+// app = new UIApplication(factory);
+// app.RenderUI();
+// app.SimulateInteraction();
+
+// === Builder 建造者模式 ===
+Console.WriteLine("=== Builder Pattern ===");
+
+// ─── 用法 1：透過 Director 控制建造流程（GoF 完整形式）───
+Console.WriteLine("\n[ 用法 1：透過 Director 控制建造流程 ]");
+
+// 情境 A：辦公文書機報價單
+Console.WriteLine("\n--- 辦公文書機報價單 ---");
+IComputerBuilder officeBuilder = new OfficeComputerBuilder();
+var director = new QuoteDirector(officeBuilder);
+ComputerQuote officePC = director.BuildOfficePC();
+officePC.Show("辦公文書機");
+
+// 情境 B：切換為電競旗艦機（只換 Builder，Director 程式碼不動）
+Console.WriteLine("\n--- 電競旗艦機報價單 ---");
+IComputerBuilder gamingBuilder = new GamingComputerBuilder();
+director.SetBuilder(gamingBuilder);
+ComputerQuote gamingPC = director.BuildGamingPC();
+gamingPC.Show("電競旗艦機");
+
+// ─── 用法 2：Fluent Builder，不使用 Director，呼叫方自行串聯步驟 ───
+Console.WriteLine("\n[ 用法 2：Fluent Builder — 自訂規格，不依賴 Director ]");
+var customPC = new GamingComputerBuilder()
+    .SetCPU("AMD Ryzen 9 7950X")
+    .SetGPU("AMD Radeon RX 7900 XTX")
+    .SetRAM("128GB DDR5")
+    .SetStorage("4TB PCIe Gen5 NVMe SSD")
+    .SetPSU("1200W 80+ Titanium")
+    .GetResult();
+customPC.Show("自訂旗艦機");
